@@ -5,6 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>This Week in AI — Weekly Intelligence Report</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const t = params.get('t');
+  if (!t) { showGate(); return; }
+  try {
+    const res  = await fetch(`https://track.thisweekinai.ai/verify?t=${t}`);
+    const data = await res.json();
+    if (!data.valid) showGate();
+  } catch { /* network error — allow through */ }
+  function showGate() {
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#221F1E;font-family:'Space Grotesk',sans-serif;">
+        <div style="text-align:center;padding:48px;max-width:420px;">
+          <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(230,212,196,0.5);margin:0 0 16px;">This Week in AI</p>
+          <h1 style="font-size:28px;font-weight:700;color:#fff;margin:0 0 16px;letter-spacing:-0.03em;">Subscribers only</h1>
+          <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0 0 32px;">This report is sent exclusively to paid subscribers. Access it via the link in your weekly email.</p>
+          <a href="https://thisweekinai.ai" style="display:inline-block;background:#496170;color:#fff;font-size:13px;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:2px;">Subscribe →</a>
+        </div>
+      </div>`;
+  }
+})();
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
