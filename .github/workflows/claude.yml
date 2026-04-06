@@ -36,6 +36,7 @@ jobs:
         uses: anthropics/claude-code-action@beta
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          allowed_tools: "Bash,Edit,Write,Read,mcp__playwright__playwright_navigate,mcp__playwright__playwright_screenshot,mcp__playwright__playwright_click,mcp__playwright__playwright_evaluate"
           mcp_config: |
             {
               "mcpServers": {
